@@ -5,10 +5,18 @@ import torch.nn as nn
 # https://pytorch.org/tutorials/beginner/pytorch_with_examples.html#pytorch-custom-nn-modules
 
 class Multiply(nn.Module):
-    def __init__(self, alpha):
+    def __init__(self, N):
         super().__init__()
-        self.alpha =  alpha
+        self.N = N
+        self.weight = torch.nn.Parameter(torch.rand(1,self.N))
 
     def forward(self, x):
-        x = torch.mul(x, self.alpha)
+        x = torch.multiply(self.weight,x)
         return x
+
+
+if __name__ == '__main__':
+   mul = Multiply(3)
+   x = torch.ones(3)
+   y = mul(x)
+   qq = 0
